@@ -8,10 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.HashMap;
@@ -36,4 +33,25 @@ public class ProjectController {
         Project newProject =  projectService.saveOrUpdateProject(project);
         return new ResponseEntity<>(newProject, HttpStatus.CREATED);
     }
+
+    @GetMapping("/{projectIdentifier}")
+    public ResponseEntity<?> findByProjectIdentifier(@PathVariable String projectIdentifier){
+
+        Project newProject =  projectService.findByProjectIdentifier(projectIdentifier);
+        return new ResponseEntity<>(newProject, HttpStatus.OK);
+    }
+
+    @GetMapping("/all")
+    public Iterable<Project> findAllProjects(){
+        return projectService.findAllProjects();
+    }
+
+    @DeleteMapping("/{projectIdentifier}")
+    public ResponseEntity<?> deleteByProjectIdentifier(@PathVariable String projectIdentifier){
+        projectService.deleteByProjectIdentifier(projectIdentifier);
+        return new ResponseEntity<>("Project '"+ projectIdentifier +"' deleted", HttpStatus.OK);
+
+    }
+
+
 }

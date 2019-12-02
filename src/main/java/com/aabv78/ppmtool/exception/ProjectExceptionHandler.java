@@ -17,4 +17,5 @@ public class ProjectExceptionHandler extends ResponseEntityExceptionHandler {
         ProjectExceptionResponse projectExceptionResponse = new ProjectExceptionResponse(ex.getMessage());
         return  new ResponseEntity<>(projectExceptionResponse, HttpStatus.BAD_REQUEST);
     }
+
 }
